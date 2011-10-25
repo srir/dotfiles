@@ -78,6 +78,7 @@ alias ls='ls --color=auto '
 alias lsa='ls -lha'
 
 alias cls='clear'
+alias screen='nocorrect screen'
 
 autoload -U compinit
 compinit
