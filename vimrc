@@ -6,8 +6,11 @@ call pathogen#helptags()
 set number
 set nowrap
 syntax enable
-set visualbell t_vb=
 set incsearch
+
+" disable error bells
+set noerrorbells visualbell t_vb=
+autocmd GUIEnter * set visualbell t_vb=
 
 " indentation
 set tabstop=4
@@ -27,10 +30,12 @@ au BufNewFile,BufRead *.h0 set filetype=h
 
 " coloring
 colo jellybeans
-au Filetype *.tex colo molokai
+au Filetype tex colo molokai
+
+" latex
+au Filetype tex set smartindent
 
 " keymaps
 map <Home> ^
 imap <Home> <Esc>^i
 set grepprg=grep\ -nH\ $*
-let g:tex_flavor='latex'

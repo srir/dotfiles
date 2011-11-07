@@ -36,7 +36,7 @@ zmodload -a zsh/zprof zprof
 zmodload -ap zsh/mapfile mapfile
 
 
-PATH="/usr/local/bin:/usr/local/sbin/:/bin:/sbin:/usr/bin:/usr/sbin:$PATH"
+PATH="~/bin:/usr/local/bin:/usr/local/sbin/:/bin:/sbin:/usr/bin:/usr/sbin:$PATH"
 TZ="America/New_York"
 HISTFILE=$HOME/.zhistory
 HISTSIZE=1000
@@ -168,6 +168,9 @@ zstyle ':completion:*:ssh:*' tag-order \
 zstyle ':completion:*:ssh:*' group-order \
    hosts-domain hosts-host users hosts-ipaddr
 zstyle '*' single-ignored show
+
+bindkey    "^[[3~"          delete-char
+bindkey    "^[3;5~"         delete-char
 
 # A shortcut function that simplifies usage of xclip.
 # - Accepts input from either stdin (pipe), or params.
