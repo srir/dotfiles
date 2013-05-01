@@ -48,4 +48,7 @@ source $ZSH/oh-my-zsh.sh
 export PATH=~/bin:/usr/local/bin:/usr/local/sbin/:/bin:/sbin:/usr/bin:/usr/sbin:$PATH
 # export PATH="/usr/local/opt/coreutils/libexec/gnubin:$PATH"
 
+source .aliases
+
+
 [[ -s `brew --prefix`/etc/autojump.sh ]] && . `brew --prefix`/etc/autojump.sh
