@@ -21,6 +21,7 @@ set nowrap
 syntax enable
 set incsearch
 set laststatus=2
+set noshowmode
 
 " colors
 set background=dark
@@ -41,3 +42,15 @@ if has("autocmd")
   filetype plugin indent on
   set nosmartindent  
 endif 
+
+set autochdir
+
+" immediate insert mode exit
+if ! has('gui_running')
+  set ttimeoutlen=10
+  augroup FastEscape
+    autocmd!
+    au InsertEnter * set timeoutlen=0
+    au InsertLeave * set timeoutlen=1000
+  augroup END
+endif

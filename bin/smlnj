@@ -1,3 +1,5 @@
 #!/bin/sh
+RLWRAP=$(which rlwrap)
+SMLNJ=$(which sml)
 
-/usr/bin/rlwrap /usr/bin/sml
+$RLWRAP $SMLNJ "$@"

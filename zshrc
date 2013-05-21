@@ -45,7 +45,7 @@ plugins=(git)
 source $ZSH/oh-my-zsh.sh
 
 # Customize to your needs...
-export PATH=~/bin:/usr/local/bin:/usr/local/sbin/:/bin:/sbin:/usr/bin:/usr/sbin:$PATH
+export PATH=/usr/local/share/npm/bin:~/bin:/usr/local/bin:/usr/local/sbin/:/bin:/sbin:/usr/bin:/usr/sbin:$PATH
 # export PATH="/usr/local/opt/coreutils/libexec/gnubin:$PATH"
 
 source .aliases
