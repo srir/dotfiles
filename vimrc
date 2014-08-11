@@ -12,6 +12,7 @@ Plugin 'gmarik/Vundle.vim'
 Plugin 'bling/vim-airline'
 Plugin 'jeffkreeftmeijer/vim-numbertoggle'
 Plugin 'altercation/vim-colors-solarized'
+Plugin 'kien/ctrlp.vim'
 
 call vundle#end()
 
