@@ -2,18 +2,18 @@ set nocompatible
 filetype off
 
 " Vundle
-set rtp+=~/.vim/bundle/vundle/
-set rtp+=~/.vim/bundle/powerline/powerline/bindings/vim/
+set rtp+=~/.vim/bundle/Vundle.vim/
 
-call vundle#rc()
+call vundle#begin()
 
-Bundle 'gmarik/vundle'
+Plugin 'gmarik/Vundle.vim'
 
 " bundles
-Bundle 'mrtazz/molokai.vim'
-Bundle 'nanotech/jellybeans.vim'
-Bundle 'Lokaltog/powerline'
-Bundle 'jeffkreeftmeijer/vim-numbertoggle'
+Plugin 'bling/vim-airline'
+Plugin 'jeffkreeftmeijer/vim-numbertoggle'
+Plugin 'altercation/vim-colors-solarized'
+
+call vundle#end()
 
 " general editor view
 set number
@@ -24,8 +24,11 @@ set laststatus=2
 set noshowmode
 
 " colors
-set background=dark
-colo jellybeans
+set background=light
+colo solarized
+
+" fonts
+let g:airline_powerline_fonts = 1
 
 " disable error bells
 set noerrorbells visualbell t_vb=

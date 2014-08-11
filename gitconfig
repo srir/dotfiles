@@ -1,6 +1,6 @@
 [user]
-	name = Mislav Marohnić
-	email = mislav.marohnic@gmail.com
+	name = Sri Raghavan
+	email = sri.raghavan.1@gmail.com
 [apply]
 	whitespace = nowarn
 [alias]
@@ -26,9 +26,10 @@
 	status = auto
 	branch = auto
 [core]
-	excludesfile = /Users/mislav/.gitignore
+	excludesfile = /Users/srir/.gitignore
 	quotepath = false
 	whitespace = -blank-at-eol
+	editor = /usr/bin/vim
 [mirror]
 	summary = true
 [branch]
