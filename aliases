@@ -1,0 +1,19 @@
+alias j='fasd_cd -d'
+alias v='vagrant'
+alias gup='git up'
+alias gci='git ci'
+alias gt='git test'
+alias gch='git rev-parse HEAD | pbcopy'
+alias gshow='git show'
+alias grb='git rebase'
+alias bzl='bazel'
+alias gcos='git checkout $(git branch | peco)'
+alias git='hub'
+alias btest='bazel query //... | peco | xargs bazel test'
+
+bazel() {
+  case $* in
+    test* ) shift 1; command bazel test "$@" --test_output errors ;;
+    * ) command bazel "$@" ;;
+  esac
+}

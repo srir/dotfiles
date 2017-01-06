@@ -1,5 +1,5 @@
 [user]
-	name = Sri Raghavan
+	name = sri raghavan
 	email = sri.raghavan.1@gmail.com
 [apply]
 	whitespace = nowarn
@@ -39,3 +39,5 @@
 	default = tracking
 [rebase]
 	autosquash = true
+[rerere]
+	enabled = true
