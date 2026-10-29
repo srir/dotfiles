@@ -1,0 +1,10 @@
+[user]
+	name = Sri Raghavan
+	email = sri.raghavan.1@gmail.com
+[pull]
+	rebase = true
+[init]
+	defaultBranch = main
+# Per-machine overrides (e.g. a work email) go in ~/.gitconfig.local.
+[include]
+	path = ~/.gitconfig.local

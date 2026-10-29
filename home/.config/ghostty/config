@@ -1,0 +1,4 @@
+theme = Duskfox
+window-save-state = always
+scrollback-limit = 4294967296
+keybind = shift+enter=text:\n
