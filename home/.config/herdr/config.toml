@@ -1,0 +1,60 @@
+onboarding = false
+[ui]
+agent_panel_sort = "spaces"
+show_agent_labels_on_pane_borders = true
+prompt_new_tab_name = false
+hide_tab_bar_when_single_tab = true
+
+[keys]
+prefix = "ctrl+b"
+new_workspace = "prefix+n"
+rename_workspace = "prefix+shift+n"
+close_workspace = "prefix+shift+d"
+new_tab = ""
+rename_tab = ""
+close_tab = ""
+switch_tab = ""
+next_workspace = "ctrl+tab"
+previous_workspace = "ctrl+shift+tab"
+next_tab = ""
+previous_tab = ""
+focus_pane_left = "prefix+h"
+focus_pane_down = "prefix+j"
+focus_pane_up = "prefix+k"
+focus_pane_right = "prefix+l"
+resize_mode = "prefix+r"
+
+[keys.indexed]
+workspaces = "ctrl+shift"
+
+# Move/swap the focused pane with its neighbor: leader (ctrl+b) then shift+h/j/k/l
+[[keys.command]]
+key = "prefix+shift+h"
+type = "shell"
+command = "/opt/homebrew/bin/herdr pane swap --direction left"
+description = "swap pane left"
+
+[[keys.command]]
+key = "prefix+shift+j"
+type = "shell"
+command = "/opt/homebrew/bin/herdr pane swap --direction down"
+description = "swap pane down"
+
+[[keys.command]]
+key = "prefix+shift+k"
+type = "shell"
+command = "/opt/homebrew/bin/herdr pane swap --direction up"
+description = "swap pane up"
+
+[[keys.command]]
+key = "prefix+shift+l"
+type = "shell"
+command = "/opt/homebrew/bin/herdr pane swap --direction right"
+description = "swap pane right"
+
+[ui.toast]
+delivery = "system"
+
+[theme]
+name = "rose-pine"
+auto_switch = false

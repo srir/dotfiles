@@ -1,0 +1,65 @@
+{
+  "$schema": "https://www.raycast.com/schemas/extension.json",
+  "name": "rex-jump",
+  "title": "Rex Jump",
+  "description": "Fuzzy-jump to any Rex session or agent pane",
+  "icon": "command-icon.png",
+  "author": "sri",
+  "categories": [
+    "Developer Tools"
+  ],
+  "license": "MIT",
+  "commands": [
+    {
+      "name": "jump",
+      "title": "Jump to Rex Pane",
+      "subtitle": "Rex",
+      "description": "Search every Rex session and pane, with agent status, and jump to one",
+      "mode": "view"
+    }
+  ],
+  "preferences": [
+    {
+      "name": "rexPath",
+      "type": "textfield",
+      "required": false,
+      "title": "rex binary",
+      "description": "Path to the rex CLI",
+      "default": "~/Library/Application Support/com.superlogical.rex/RexServer/Versions/Current/Rex Server.app/Contents/MacOS/rex"
+    },
+    {
+      "name": "appName",
+      "type": "textfield",
+      "required": false,
+      "title": "Rex app name",
+      "description": "The app to bring forward after jumping",
+      "default": "Rex Beta"
+    },
+    {
+      "name": "aerospacePath",
+      "type": "textfield",
+      "required": false,
+      "title": "aerospace binary",
+      "description": "Path to the AeroSpace CLI (used to raise the Rex window already showing a session)",
+      "default": "/opt/homebrew/bin/aerospace"
+    }
+  ],
+  "dependencies": {
+    "@raycast/api": "^1.80.0",
+    "@raycast/utils": "^1.17.0"
+  },
+  "devDependencies": {
+    "@raycast/eslint-config": "^1.0.0",
+    "@types/node": "22.19.17",
+    "@types/react": "19.0.10",
+    "eslint": "^8.57.0",
+    "prettier": "^3.3.0",
+    "typescript": "^5.4.0"
+  },
+  "scripts": {
+    "build": "ray build -e dist",
+    "dev": "ray develop",
+    "lint": "ray lint",
+    "fix-lint": "ray lint --fix"
+  }
+}

@@ -1,1 +1,16 @@
-vim/tmp
+.DS_Store
+node_modules/
+dist/
+
+# Built by `make` in install.sh
+home/.config/sketchybar/helpers/**/bin/
+
+# State and credentials apps write next to their config
+home/.config/karabiner/automatic_backups/
+home/.config/zed/*
+!home/.config/zed/settings.json
+!home/.config/zed/keymap.json
+home/.config/graphite/*
+!home/.config/graphite/aliases
+home/.config/herdr/*
+!home/.config/herdr/config.toml

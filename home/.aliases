@@ -1,0 +1,50 @@
+alias ls="eza"
+alias lsa="eza -lha"
+alias cat="bat"
+
+alias grb="git rebase"
+alias ga="git add"
+alias gb="git branch"
+alias gp="git push"
+alias gl="git pull"
+alias gd="git diff"
+alias gcam="gc --no-verify -a -m"
+
+# copy commit hash
+alias gch="git rev-parse HEAD | pbcopy"
+
+function _gco() {
+  git checkout ${@:-$(git branch | fzf)}
+}
+
+alias gc="gt create --commit"
+alias gst="gt status"
+alias gco="gt co"
+alias gup="gt sync"
+alias glg="gt lg"
+
+function _gup() {
+    CURRENT_BRANCH=$(git rev-parse --abbrev-ref HEAD)
+    if [[ "$CURRENT_BRANCH" == "main" ]]; then
+        git pull
+    else
+        git checkout main && git pull && git checkout - && git rebase main $@
+    fi
+}
+
+
+# Attach this window to the herd for its aerospace space (session = space).
+hs() {
+    local name="${1:-$(aerospace list-windows --focused --format '%{workspace}' 2>/dev/null | head -n1)}"
+    herdr --session "${name:-${PWD:t}}"
+}
+
+# Open the current worktree as a workspace in the attached herd, labeled by branch.
+# Run from inside a pane; herdr targets that pane's session via HERDR_SOCKET_PATH.
+hw() {
+    local label=$(git rev-parse --abbrev-ref HEAD 2>/dev/null | tr '/' '-')
+    herdr workspace create --cwd "$PWD" --label "${label:-${PWD:t}}" --focus
+}
+
+# Switch worktrees with worktrunk, then surface the worktree as a workspace.
+wtw() { wt switch "$@" && hw; }
