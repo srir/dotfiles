@@ -11,17 +11,71 @@ local P = "ctrl+b>" -- herdr prefix
 
 -- Sessions (herdr workspaces) ------------------------------------------------
 
-rex.bind(P .. "n", "session.new")
+local HOME = os.getenv("HOME")
+
+-- Rex doesn't remember which session a window showed before, so the switching
+-- keys below note the session they leave, most recent first. Switching by
+-- clicking in the sidebar isn't recorded.
+local HISTORY_DIR = HOME .. "/.local/state/rex"
+local HISTORY = HISTORY_DIR .. "/session-history"
+rex.exec{ "mkdir", "-p", HISTORY_DIR }
+
+local function session_history()
+  local ids = {}
+  local f = io.open(HISTORY)
+  if f then
+    for id in f:lines() do
+      ids[#ids + 1] = id
+    end
+    f:close()
+  end
+  return ids
+end
+
+local function remember_session(id)
+  if not id then return end
+  local ids = { id }
+  for _, other in ipairs(session_history()) do
+    if other ~= id and #ids < 50 then
+      ids[#ids + 1] = other
+    end
+  end
+  local f = io.open(HISTORY, "w")
+  if f then
+    f:write(table.concat(ids, "\n"), "\n")
+    f:close()
+  end
+end
+
+-- Like rex.bind(key, action), but records the session being left first.
+local switch_actions = {}
+local function bind_switch(key, action)
+  local name = "remember_then_" .. action:gsub("%.", "_")
+  if not switch_actions[name] then
+    switch_actions[name] = true
+    rex.action{
+      name = name,
+      title = "Remember Session, Then " .. action,
+      run = function(ctx)
+        remember_session(ctx.session_id)
+        rex.client.queue(action, {})
+      end,
+    }
+  end
+  rex.bind(key, name)
+end
+
+bind_switch(P .. "n", "session.new")
 rex.bind(P .. "shift+n", "session.rename")
 rex.bind(P .. "shift+d", "session.close")
-rex.bind(P .. "w", "session.switch") -- herdr workspace picker
-rex.bind(P .. "g", "session.switch") -- herdr goto
-rex.bind("cmd+k", "session.switch")
-rex.bind("ctrl+p", "session.switch")
+bind_switch(P .. "w", "session.switch") -- herdr workspace picker
+bind_switch(P .. "g", "session.switch") -- herdr goto
+bind_switch("cmd+k", "session.switch")
+bind_switch("ctrl+p", "session.switch")
 
-rex.bind("ctrl+tab", "session.next")
-rex.bind("ctrl+shift+tab", "session.previous")
-rex.bind("ctrl+`", "session.previous") -- Ghostty workaround, kept for muscle memory
+bind_switch("ctrl+tab", "session.next")
+bind_switch("ctrl+shift+tab", "session.previous")
+bind_switch("ctrl+`", "session.previous") -- Ghostty workaround, kept for muscle memory
 
 -- Go to the Nth session, like herdr's [keys.indexed] workspaces.
 -- Sessions are numbered in the server's list order, which may differ from the
@@ -33,6 +87,7 @@ rex.action{
   run = function(ctx, args)
     local s = rex.call("session.list").sessions[args.index]
     if s then
+      remember_session(ctx.session_id)
       rex.client.queue("session.select", { session_id = s.session_id })
     end
   end,
@@ -43,24 +98,37 @@ for i = 1, 9 do
   rex.bind("cmd+" .. i, "goto_session", { index = i })
 end
 
--- Open the current session in a new window. "New Window" can't take a session,
--- so new_window.lua waits for the window, points it at this session, and
--- destroys the empty session the window started with.
-local HOME = os.getenv("HOME")
+-- Open the current session in a new window, and send this window back to the
+-- session it showed before. "New Window" can't take a session, so
+-- new_window.lua waits for the window, points it at this session, and destroys
+-- the empty session the window started with.
 local REX_BIN = HOME .. "/Library/Application Support/com.superlogical.rex/RexServer/Versions/Current/Rex Server.app/Contents/MacOS/rex"
 rex.action{
   name = "new_window_with_session",
   title = "New Window with This Session",
   run = function(ctx)
-    local ids = {}
+    local ids, live = {}, {}
     for _, s in ipairs(rex.call("session.list").sessions or {}) do
       ids[#ids + 1] = s.session_id
+      live[s.session_id] = true
+    end
+    local previous
+    for _, id in ipairs(session_history()) do
+      if id ~= ctx.session_id and live[id] then
+        previous = id
+        break
+      end
     end
     rex.exec{
       "sh", "-c", '"$0" do "$1" rex="$0" target="$2" existing="$3" >>"$4" 2>&1 &',
       REX_BIN, HOME .. "/.config/rex/new_window.lua", ctx.session_id, table.concat(ids, ","),
       HOME .. "/Library/Logs/rex-new-window.log",
     }
+    -- Switch this window first: once the new window opens, it has focus.
+    if previous then
+      remember_session(ctx.session_id)
+      rex.client.queue("session.select", { session_id = previous })
+    end
     rex.client.queue("client.window.new", {})
   end,
 }
@@ -109,7 +177,7 @@ rex.bind(P .. "s", "client.settings")
 rex.bind(P .. "shift+/", "client.palette.toggle") -- herdr help (prefix+?)
 rex.bind(P .. "shift+r", "client.config.reload")
 -- Import Ghostty's Duskfox theme (press once; re-press after editing the file)
-rex.bind(P .. "shift+t", "client.theme.import", { path = os.getenv("HOME") .. "/.config/ghostty/themes/Duskfox" })
+rex.bind(P .. "shift+t", "client.theme.import", { path = HOME .. "/.config/ghostty/themes/Duskfox" })
 
 -- Press the prefix twice to send a literal ctrl+b to the program
 rex.bind(P .. "ctrl+b", "pane.send_key", { key = "ctrl+b" })
