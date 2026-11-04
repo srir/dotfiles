@@ -1,0 +1,96 @@
+[
+  {
+    "context": "Editor && (vim_mode != insert || showing_completions)",
+    "bindings": {
+      "ctrl-j": "menu::SelectNext",
+      "ctrl-k": "menu::SelectPrevious"
+    }
+  },
+  {
+    "context": "Editor && (showing_code_actions || showing_completions)",
+    "bindings": {
+      "ctrl-j": "editor::ContextMenuNext",
+      "ctrl-k": "editor::ContextMenuPrevious"
+    }
+  },
+  {
+    "context": "Editor",
+    "bindings": {
+      "cmd--": "editor::Fold",
+      "cmd-_": "editor::FoldAll",
+      "cmd-=": "editor::UnfoldLines",
+      "cmd-+": "editor::UnfoldAll",
+      "cmd-n": "project_panel::NewFile",
+      "cmd-up": "pane::RevealInProjectPanel"
+    }
+  },
+  {
+    "bindings": {
+      "cmd-1": "project_panel::ToggleFocus",
+      "cmd-2": "outline_panel::ToggleFocus",
+      "ctrl-p": "file_finder::Toggle",
+      "ctrl-w c": "pane::CloseAllItems",
+      "shift-escape": "workspace::ToggleLeftDock",
+      "cmd-alt-shift-c": "editor::CopyPermalinkToLine"
+    }
+  },
+  {
+    "context": "BufferSearchBar && !in_replace",
+    "bindings": {
+      "enter": "search::SelectNextMatch"
+    }
+  },
+  {
+    "context": "(VimControl && !menu) || vim_mode == replace || vim_mode == waiting",
+    "bindings": {
+      "tab": "vim::Tab"
+    }
+  },
+  {
+    "context": "vim_mode == literal",
+    "bindings": {
+      "tab": ["vim::Literal", ["tab", "\u0009"]]
+    }
+  },
+  {
+    "context": "ProjectSearchView",
+    "bindings": {
+      "ctrl-shift-r": "search::ToggleReplace"
+    }
+  },
+  {
+    "context": "Pane",
+    "bindings": {
+      "ctrl-shift-r": "search::ToggleReplace"
+    }
+  },
+  {
+    "context": "ProjectSearchBar",
+    "bindings": {
+      "ctrl-shift-r": "search::ToggleReplace"
+    }
+  },
+  {
+    "context": "((((((Dock || Workspace)) || OutlinePanel) || ProjectPanel) || CollabPanel) || (Editor && mode == auto_height)) &&!Terminal",
+    "bindings": {
+      "escape": "editor::ToggleFocus"
+    }
+  },
+  {
+    "bindings": {
+      "ctrl-shift-f": "workspace::NewSearch"
+    }
+  },
+  {
+    "context": "Editor",
+    "bindings": {
+      "alt-cmd-shift-l": "editor::SelectRight"
+    }
+  },
+  {
+    "context": "Editor",
+    "bindings": {
+      "ctrl-f": "pane::DeploySearch"
+    }
+  }
+]

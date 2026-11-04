@@ -1,0 +1,122 @@
+// Zed settings
+//
+// For information on how to configure Zed, see the Zed
+// documentation: https://zed.dev/docs/configuring-zed
+//
+// To see all of Zed's default settings without changing your
+// custom settings, run the `open default settings` command
+// from the command palette or from `Zed` application menu.
+{
+  "seed_search_query_from_cursor": "selection",
+  "session": {
+    "trust_all_worktrees": true
+  },
+  "default_open_behavior": "new_window",
+  "cli_default_open_behavior": "new_window",
+  "project_panel": {
+    "dock": "left"
+  },
+  "outline_panel": {
+    "dock": "right"
+  },
+  "collaboration_panel": {
+    "dock": "right"
+  },
+  "git_panel": {
+    "dock": "right"
+  },
+  "edit_predictions": {
+    "provider": "copilot"
+  },
+  "unnecessary_code_fade": 0.4,
+  "diagnostics": {
+    "include_warnings": false,
+  },
+  "buffer_line_height": "comfortable",
+  "agent_servers": {
+    "claude-acp": {
+      "type": "registry",
+      "default_mode": "plan"
+    }
+  },
+  "terminal": {
+    "dock": "right",
+  },
+  "agent": {
+    "inline_assistant_model": {
+      "provider": "copilot_chat",
+      "model": "claude_sonnet_4.5",
+    },
+    "dock": "left",
+    "default_model": {
+      "provider": "copilot_chat",
+      "model": "gpt-4o",
+    },
+  },
+  "icon_theme": {
+    "mode": "dark",
+    "light": "Material Icon Theme",
+    "dark": "Material Icon Theme"
+  },
+  "theme": {
+    "mode": "dark",
+    "light": "One Light",
+    "dark": "Duskfox - opaque"
+  },
+  "buffer_font_size": 12.0,
+  "buffer_font_family": "Hack Nerd Font Mono",
+  "ui_font_size": 14,
+  "ui_font_family": "Hack Nerd Font Mono",
+  "confirm_quit": true,
+  "vim_mode": true,
+  "autosave": "on_window_change",
+  "tab_bar": {
+    "show": false,
+  },
+  "max_tabs": 1,
+  "inlay_hints": {
+    "enabled": true,
+    "show_parameter_hints": true,
+    "show_background": true,
+  },
+  "scrollbar": {
+    "show": "never",
+  },
+  "scroll_beyond_last_line": "vertical_scroll_margin",
+  "vertical_scroll_margin": 10,
+  "relative_line_numbers": "enabled",
+  "base_keymap": "JetBrains",
+  "enable_language_server": true,
+  "languages": {
+    "Python": {
+      "language_servers": ["ty", "!basedpyright", "!pyright", "!pylsp", "..."],
+      "tab_size": 4,
+    },
+    "TypeScript": {
+      "tab_size": 4,
+    },
+    "TSX": {
+      "tab_size": 4,
+    },
+    "YAML": {
+      "tab_size": 4,
+      "format_on_save": "off",
+    },
+    "JSON": {
+      "tab_size": 4,
+      "format_on_save": "off",
+    },
+  },
+  "restore_on_startup": "launchpad",
+  "pane_split_direction_vertical": "right",
+  "pane_split_direction_horizontal": "down",
+  "lsp": {
+    "basedpyright": {
+      "settings": {
+        "python": {
+          "pythonPath": "/Users/sri/.pyenv/shims/python",
+        },
+      },
+    },
+  },
+}
